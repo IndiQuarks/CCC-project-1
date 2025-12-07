@@ -58,10 +58,66 @@ const uint16_t snake_durs[] = {
   150, 150, 150, 150, 150, 400
 };
 
-Song songDhoom = { dhoom_freqs, dhoom_durs, (uint8_t)(sizeof(dhoom_freqs) / sizeof(uint16_t)), nullptr };
-Song songHB   = { hb_freqs,    hb_durs,    (uint8_t)(sizeof(hb_freqs)    / sizeof(uint16_t)), nullptr };
-Song songNokia= { nokia_freqs, nokia_durs, (uint8_t)(sizeof(nokia_freqs) / sizeof(uint16_t)), nullptr };
-Song songSnake= { snake_freqs, snake_durs, (uint8_t)(sizeof(snake_freqs) / sizeof(uint16_t)), nullptr };
+const uint16_t customSong_freqs[] = {
+  330,494,440,494,440,494,392,440,494,440,392,349,
+  330,494,440,494,440,494,392,440,494,440,
+  330,494,440,494,440,494,392,440,494,440,392,349,
+  294,330,349,392,349,330,
+  294,349,330,349,330,
+  330,494,440,494,440,494,392,440,494,440,392,349,
+  330,494,440,494,440,494,392,440,494,440,
+  330,494,440,494,440,494,392,440,494,440,392,349,
+  294,330,349,392,349,330,
+  294,349,330,349,330
+};
+
+const uint16_t customSong_durs[] = {
+  250,250,250,250,250,250,250,250,250,250,250,250,
+  250,250,250,250,250,250,250,250,250,500,
+  250,250,250,250,250,250,250,250,250,250,250,250,
+  500,250,250,500,250,250,
+  500,250,250,250,250,
+  250,250,250,250,250,250,250,250,250,250,250,250,
+  250,250,250,250,250,250,250,250,250,500,
+  250,250,250,250,250,250,250,250,250,250,250,250,
+  250,250,250,250,250,250,
+  500,250,250,250,250
+};
+
+Song songDhoom = {
+  dhoom_freqs,
+  dhoom_durs,
+  (uint8_t)(sizeof(dhoom_freqs) / sizeof(uint16_t)),
+  nullptr
+};
+
+Song songHB = {
+  hb_freqs,
+  hb_durs,
+  (uint8_t)(sizeof(hb_freqs) / sizeof(uint16_t)),
+  nullptr
+};
+
+Song songNokia = {
+  nokia_freqs,
+  nokia_durs,
+  (uint8_t)(sizeof(nokia_freqs) / sizeof(uint16_t)),
+  nullptr
+};
+
+Song songSnake = {
+  snake_freqs,
+  snake_durs,
+  (uint8_t)(sizeof(snake_freqs) / sizeof(uint16_t)),
+  nullptr
+};
+
+Song songCustom = {
+  customSong_freqs,
+  customSong_durs,
+  (uint8_t)(sizeof(customSong_freqs) / sizeof(uint16_t)),
+  nullptr
+};
 
 Song* currentSong = &songDhoom;
 uint8_t currentIndex = 0;
@@ -81,7 +137,8 @@ void setup() {
   songDhoom.next = &songHB;
   songHB.next = &songNokia;
   songNokia.next = &songSnake;
-  songSnake.next = &songDhoom;
+  songSnake.next = &songCustom;
+  songCustom.next = &songDhoom;
 
   ledcSetup(BUZZER_CH, 2000, 8);
   ledcAttachPin(BUZZER_PIN, BUZZER_CH);
