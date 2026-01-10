@@ -159,7 +159,7 @@ void loop() {
         currentIndex = 0;
         currentSong = currentSong->next;
       }
-      notePlaying = false;
+      notePlaying = true;
     }
   }
 }
